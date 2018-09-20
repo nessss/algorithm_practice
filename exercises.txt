@@ -1,0 +1,661 @@
+1-1 Show that a + b can be less than min(a, b).
+    solution: both a and b are negative
+              a = -3
+              b = -5
+              a + b = -8
+              min(a, b) = -5
+              (a + b) < min(a, b)
+
+1-2 Show that a * b can be less than min(a, b).
+    solution: both a and b are less than 1 but greater than zero,
+              or at least one of a and b are negative
+              (1)
+              a = 0.5
+              b = 0.8
+              a * b = 0.4
+              min(a, b) = 0.5
+              (a * b) < min(a, b)
+
+              (2)
+              a = -3
+              b = 5
+              a * b = -15
+              min(a, b) = -3
+              (a * b) < min(a, b)
+
+1-3 Design/draw a road network with two points a and b such that
+    the fastest route between a and b is not the shortest route.
+    solution: A road network in which there are three points, a
+              b, and c. Each point has a road to each other point.
+              There are speed limits for each road; the road between
+              a and b has a speed limit of 20 km/h, and the roads
+              between a and c, and b and c each have a speed limit
+              of 50 km/hr. Each road has a length of 1 km.
+              Time travelled for each route from a to b:
+              a -> b:
+                1 km / (20 km/hr) = 0.05 hr = 3 minutes
+              a -> c -> b:
+                2 km / (50 km/hr) = 0.04 hr = 2.4 minutes
+
+1-4 Design/draw a road network with two points a and b such that
+    the fastest route between a and b is not the route with the
+    fewest turns.
+    solution:   b---------------c
+                |               |
+                |               |
+                |               |
+                h-g             |
+                  |             |
+                e-f             |
+                |               |
+                |               |
+                |               |
+                a---------------d
+
+                observe that a->d->c->b has two turns, and is 42
+                units long. a->e->f->g->h->b has four turns, and is
+                14 units long.
+
+1-5 The knapsack problem is as follows: given a set of integers
+    S = { s_1, s_2... s_n }, and a target number T, find a subset of
+    S which adds up exactly to T. For example, there exists a subset
+    within S = { 1, 2, 5, 9, 10 } that adds up to T = 22 but not
+    T = 23.
+    Find counterexamples to each of the following algorithms for the
+    knapsack problem. That is, giving an S and T such that the subset
+    that is selected using the algorithm does not leave the knapsack
+    completely full, even though such a solution exists.
+
+    (A) Put the elements of S in the knapsack in left to right order
+        if they fit, i.e. the first-fit algorithm.
+        solution: see knapsack.cpp, first_fit_counterexample().
+
+    (B) Put the elements of S in the knapsack from smallest to largest,
+        i.e the best-fit algorithm.
+        solution: see knapsack.cpp, best_fit_counterexample().
+
+    (C) Put the elements of S in the knapsack from largest to smallest.
+        solution: see knapsack.cpp, greedy_counterexample().
+
+
+1-6 The set cover problem is as follows: given a set of subsets S_1, ..., S_m
+    of the universal set { 1, ... , n } find the smallest subset of subsets
+    T subset of S such that every element of U is represented in T. For example,
+    there are the following subsets, S_1 = { 1, 3, 5 }, S_2 = { 2, 4 },
+    S_3 = { 1, 4 }, and S_4 = { 2, 5 }. The set cover would then be S_1 and S_2.
+    Find a counterexample for the following algorithm: Select the largest subset
+    for the cover, and then delete all its elements from the universal set.
+    Repeat by adding the subset with the largest number of uncovered elements
+    from the universal set until all elements are covered.
+
+    solution: see set_cover.cpp, greedy_counterexample(). The key to the
+    counterexample is that the best selection of subsets does not include the
+    largest subset.
+
+
+1-7 Prove the correctness of the following recursive algorithm to multiply
+    two natural numbers, for all integer constants c >= 2.
+
+    function multiply( y, z )
+        comment Return the product y*z.
+        if z == 0 then return( 0 )
+        else return multiply( c * y, floor( z / c ) ) + y * ( z % c )
+
+    solution:
+    c = 2;
+    y = 3, z = 4;
+    z != 0, so return multiply( 2 * 3, floor( 4 / 2 ) ) + 3 * ( 4 % 2 )
+    multiply( 6, 2 ) + 3 * ( 0 )
+
+    return multiply( 2 * 6, floor( 2 / 2 ) ) + 6 * ( 2 % 2 )
+    multiply( 12, 1 ) + 0
+
+    return multiply( 2 * 12, floor( 1 / 2 ) ) + 12 * ( 1 % 2 )
+    multiply( 24, 0 ) + 12
+
+    z == 0, so return 0 + 12
+    result is 12
+
+    ----
+    c = 3;
+    y = 3, z = 4;
+    z != 0, so return multiply( 3 * 3, floor( 4 / 3 ) ) + 3 * ( 4 % 3 )
+    multiply( 9, 1 ) + 3
+    return multiply( 3 * 9, floor( 1 / 3 ) ) + 9 * ( 1 % 3 ) + 3
+    multiply( 27, 0 ) + 9 + 3
+    z == 0, so return 9 + 3 = 12
+
+
+    The algorithm is correct because in all cases, z is reduced to 0 through
+    recursion, as the remainder of the maximum multipilcation of c is added at each
+    step. Therefore, the result will always be the same as simple multiplication for
+    any c >= 2.
+
+1-8 Prove the correctness of the following algorithm for evaluating a polynomial.
+    P(x) = a_n * x^n + a_n-1 * x^n-1 ... a_1 * x + a_0
+        function horner( A, x )
+            p = A_n
+            for i from n-1 to 0
+                p = p * x + A_i
+            return p
+
+    solution: I don't understand the math well enough to understand the problem.
+
+1-9 Prove the correctness of the following sorting algorithm.
+        function bubblesort( A: list[1 ... n] )
+            int i, j
+            for i from n to 1
+                for j from 1 to i - 1
+                    if A[j] > A[j+1]
+                        swap A[j], A[j+1]
+
+    solution: The algorithm is correct because after each pass of the outer loop,
+              the maximum unsorted element will end up at its proper position toward
+              the end of the list.
+              After the outer loop is finished, all sublists in A will be sorted,
+              which means that A will be sorted.
+
+
+1-28 Write a function to perform integer division without using the / or * operators.
+     Find a fast way to do it.
+     solution: see interview_problems.cpp, test_integer_division()
+
+1-29 There are 25 horses. At most, 5 horses can race together at a time. You must 
+     determine the fastest, second fastest, and third fastest horses. Find the 
+     minimum number of races in which this can be done.
+     solution: If we are able to record the time each horse takes to complete the
+               race, the problem is trivial. Simply divide the horses into five
+               groups and race each group, recording the time for each horse, and
+               pick the three fastest horses.
+
+               However, if we aren't able to time them, then the problem becomes
+               more interesting. My intuition tells me to pick five horses at
+               random, race them, and then disqualify the slowest two horses.
+               Take two more unraced horses at random, and repeat until all horses
+               have been raced, and then the fastest three horses in the last race
+               will be the fastest three horses in the group.
+               This would take eleven races, each race disqualifying two horses,
+               leaving the three fastest horses.
+
+               Another solution would be to start as before, racing five random
+               horses, and disqualifying the slowest two. Then, take the third
+               fastest horse from the first race, and race it against four random
+               unraced horses. Only if any of the new horses beat the already-raced
+               horse do we have to re-race either of the two fastest horses from the
+               first race. If the third-fastest horse from the first race is the
+               fastest horse of the second race, all four new horses of the second
+               race can be disqualified. If at least two horses in the second race
+               are faster than the horse from the first race, the horse from the
+               first race can be disqualified.
+               In the best case, this solution can find the three fastest horses,
+               in order, in eight races. This would occur if the three fastes horses
+               happen to be in the first group of five raced.
+               In the worst case, this solution will find the three fastest horses
+               in fourteen races.
+
+2-1 What value is returned by the following function? Express your answer as a 
+    function of n. Give the worst-case running time using Big Oh notation.
+        function mystery( n )
+            r := 0
+            for i := 1 to n - 1 do
+                for j := i + 1 to n do
+                    for k := 1 to j do
+                        r := r + 1
+            return( r )
+
+    solution: The function returns the sum of sums ( 1 + 2 + ... n ) +
+              ( 1 + 2 + ... n- 1 ) + ... 1, i.e. the nth triangle number. 
+              for n = 8, the function returns 8 + 7 + 6 + ... + 1 = 36.
+              The function runs in O(n^2) complexity.
+              I was wrong. I can't easily describe the relationship between n and
+              what the function returns. I am fairly certain, though, that
+              it runs in O(n^2) complexity, as n / mystery(n) grows faster than n.
+
+2-2 What value is returned by the following function? Express your answer as a 
+    function of n. Give the worst-case running time using Big Oh notation.
+        function pesky(n)
+            r := 0
+            for i := 1 to n do
+                for j := 1 to i do
+                    for k := j to i + j do
+                        r := r + 1
+            return( r )
+    solution: pesky( n ) ~= 0.66667n + -1n^2 + 0.3333n^3
+              This function runs in O(n^3) complexity.
+
+
+2-3 What value is returned by the following function? Express your answer as a 
+    function of n. Give the worst-case running time using Big Oh notation.
+        function prestiferous( n )
+            r := 0
+            for i := 1 to n do
+                for j := 1 to i do
+                    for k := j to i + j do
+                        for l := 1 to i + j - k do
+                            r := r + 1
+            return( r )
+
+    solution: I'm starting to notice a pattern. I would assume that the additional
+              loop would add an additional polynomial term to the equation, and
+              that this function would run in O(n^4) time.
+              After plotting the output and using grapher to find a best-fit
+              polynomial function, I find:
+              prestiferous( n ) ~= 0.0307 + 0.1754n + 0.7407n^2 + -0.5741n^3 +
+                                   0.1248n^4
+              This confirms my suspicions that this function runs in O(n^4) time.
+
+2-4 What value is returned by the following function? Express your answer as a 
+    function of n. Give the worst-case running time using Big Oh notation.
+        function conundrum( n )
+            r := 0
+            for i := 1 to n do
+                for j := i + 1 to n do
+                    for k := i + j - 1 to n do
+                        r := r + 1
+            return( r )
+
+    solution: Without calculating anything, I would estimate that this function
+              runs in O( n^3 ) complexity, due to the level of nested loops.
+              After plotting the function's output and finding a best-fit
+              polynomial, I found that:
+              f( n ) ~= -0.5046 + 2.0092 - 1.4866n^2 + 0.3333n^3
+              This confirms my guess that the function runs in O(n^3) complexity.
+
+2-5 Suppose the following algorithm is used to evaluate the polynomial
+    p(x) = a_n * x^n + a_n-1 * x^n-1 + ... a_1 * x + a_0
+
+        p := a_0
+        xpower := 1
+        for i := 1 to n do
+            xpower := x * xpower
+            p := p + a_i * xpower
+        end
+
+    (a) How many multiplications are done in the worst case? How many additions?
+    (b) How many multiplications are done on the average?
+    (c) Can you improve this algorithm?
+
+    solution:
+        (a) I'm a bit confused; this algorithm has no conditionals, so the number
+            of multiplications and additions depends soley on the number of
+            coefficients of the polynomial. There will always 2n multiplications,
+            and n additions, where n is the order of the polynomial.
+        (b) See solution for (a)
+        (c) I can't see any way to improve this algorithm.
+
+2-6 Prove that the following algorithm for computing the maximum value in an array
+    A[1..n] is correct.
+        function max( A )
+            m := A[1]
+            for i := 2 to n do
+                if A[i] > m then m := A[i]
+        return( m )
+
+    solution: The algorithm will always return the maximum value, as every element
+              in the array is compared to the largest value found thus far,
+              replacing it if it is larger. Since every element is checked, the
+              algorithm will find the maximum every time.
+
+2-7 True or false?
+        (a) Is 2^(n + 1) = O(2^n)?
+        (b) Is 2^(2n) = O(2^n)?
+
+    solution:
+        (a) No, it is O( 2^( n +1 ) ) // I got this wrong. It is true.
+        (b) No, it is O( 2^n )
+
+
+skipping a bunch of really mathy problems bc i didn't study math in school :(
+
+2-43 You are given a set S of n numbers. You must pick a subset S' of k numbers
+     from S such that the probability of each element of S occuring in S' is equal
+     (i.e. each is selected with probability k/n). You may make only one pass over
+     the numbers. What if n is unknown?
+     solution:
+        I feel that I must be misunderstanding the question, as it seems trivial
+        regardless of whether n is known. Simply take the first k elements from S.
+        If a uniform distribution is required and n is known, then take every 
+        ((k/n) * k)th element from S. If n is unknown, I see no solution that would
+        provide a uniform distribution.
+
+
+2-44 We have 1,000 data items to store on 1,000 nodes. Each node can store copies
+     of exactly three different items. Propose a replication scheme to minimize
+     data loss as nodes fail. What is the expected number of data entries that get
+     lost when three random nodes fail?
+     solution:
+        Assign the data entries to the nodes in a staggered manner, so that node[i]
+        holds data[i], data[(i+1)%n], and data[(i+2)%n]. In order for any data to be
+        lost if three random nodes fail, the three failing nodes would have to be
+        sequential, and only one data entry would be lost. The probability of three
+        randomly selected nodes being sequential is 0.001^2, or 1.0e-6.
+
+2-45 Consider the following algorithm to find the minimum element in an array of
+     numbers A[0,...,n]. One extra variable, tmp, is allocated to hold the current
+     minimum value. Start from A[0]; "tmp" is compared against A[1], A[2], ..., A[n]
+     in order. When A[i] < tmp, tmp = A[i]. What is the expected number of times
+     that the assignment operation tmp = A[i] is performed?
+     solution:
+        In the worst case, where the array is sorted in largest-to-smallest order,
+        the assignment operation is performed n times, where n is the size of the
+        array.
+        In the best case, where the first element is the smallest, the assignment
+        operation is performed only once.
+        In the average case, the assignment is performed n/2 times.
+
+        After checking the solution, I realize I was wrong. Since the probability
+        of each element being the minimum is 1/n, the average number of assignments
+        approaches ln( n ) as n grows large.
+
+2-46 You have a 100-story building and a couple of marbles. You must identify the
+     lowest floor for which a marble will break if you drop it from this floor. How
+     fast can you find this floor if you are given an infinite supply of marbles?
+     What if you only have two marbles?
+     solution:
+        If I have an unlimited supply of marbles, this problem can be solved as a
+        binary search tree; drop a marble at the middle floor, and if it breaks,
+        move halfway down the building and repeat; if it doesn't, move halfway up
+        the building and repeat until I find two consecutive floors where the 
+        upper floor won't break the marble and the lower will.
+        If I have only two marbles, I can still use the first marble to find if
+        the middle floor will break the marble, but then if it does, I must start
+        at the bottom and work my way up until I find a floor which breaks it.
+        If the middle floor does not break the marble, I can continue the binary
+        search algorithm, keeping track of the highest floor which will not break
+        the marble, until I find a floor which does. At that point I would work up
+        from one floor above the highest floor which will not break the marble
+        until I find the lowest floor which will.
+        With the unlimited supply of marbles, I can find the target floor in
+        log_2( 100 ) ~= 6.64 drops.
+        With only two marbles, the math is more complicated, but in the worst case
+        I will find the target floor in 50 drops, where the target floor is the
+        first one I drop a marble. In the best case, I will find the target floor 
+        in three drops, where the floor below the middle floor is the target floor.
+
+2-47 You are given 10 bags of gold coins. Nine bags contain coins that weigh 10
+     grams. One bag contains false coins that all weigh one gram less. You must
+     identify this bag in just one weighing. You have a digital balance that reports
+     the weight of what is placed on it.
+     solution:
+        There must be some trick to this. Perhaps I'm allowed to remove coins and
+        weigh them on their own, or shift coins from bag to bag. I assume that
+        the digital balance only weighs one item or group of items at once.
+        Aha! Assigning each bag a sequential number from one to ten, take that many
+        coins from each bag, and weigh the pile. Subtract this weight from 
+        10 * 1 + 10 * 2 + ... 10 * 10, and the result will be the number of the bag
+        that has (or had, in the case where it was the bag assigned the number ten)
+        the false coins. This assumes that I am able to keep track of which coins 
+        came from which bag, or that the coins don't need to be returned to their bags
+        at the end.
+
+2-48 You have eight balls all of the same size. Seven of them weigh the same, and
+     one of them weighs slightly more. How can you find the ball that is heavier by
+     using a balance and only two weighings?
+     solution:
+        This is tricky; my intuition would be to treat this as a binary search
+        problem, but that would take three weighings.
+        Oh! Take six of the balls, and put them on the balance, three to a side.
+        If the heavier ball is among them, take the three balls on the heavier
+        side of the balance, and weigh two of them against one another. If the
+        heavier ball is among them, we've found it, and if it's not, it's the ball
+        that we didn't weigh from that group of three.
+        If the heavier ball is not among the six we selected in the first step, then
+        it must be one of the two remaining, so we can weigh those against each other
+        to find the heavier ball.
+
+2-49 Suppose we start with n companies that eventually merge into one big company.
+     How many different ways are there for them to merge?
+     solution:
+        My intuition is to enumerate all the possible ways for them to merge by
+        hand, but there is probably a smarter, mathier way to do it.
+        Well, there are n^2 ways for the first merger to happen, and n-1^2 ways
+        for the second merger to happen, all the way down to a single option for
+        the last merger.
+        So, you could express it as the sum from n to 1 of i^2.
+
+2-50 A Ramanujan number can be written two different ways as the sum of two cubes--
+     i.e. there exists distinct a, b, c, and d, such that a^3 + b^3 = c^3 + d^3.
+     Generate all Ramanujan numbers where a, b, c, d < n.
+     solution:
+        see ramanujan.cpp
+
+2-51 Six pirates must divide $300 among themselves. The division is to proceed as
+     follows. The senior pirate proposes a way to divide the money. Then the pirates
+     vote. If the senior pirate gets at least half the votes, he wins, and that
+     division remains. If he doesn't, he is killed and then the next senior-most
+     pirate gets a chance to do the division. Now you have to tell what will happen
+     and why (i.e. how many pirates survive and how is the division done)? All the
+     pirates are intelligent and the first priority is to survive and the next
+     priority is to get as much money as possible.
+     solution:
+        In order for the senior pirate to survive, they must choose to divide it so
+        that at least two other pirates are happy with their share. Thus, if the
+        senior pirate chooses to divide the money in three, taking one share and
+        choosing two other pirates to take the other shares, those pirates are
+        likely to vote in favor of this scheme.
+        If the senior pirate is not allowed to vote on their own division scheme,
+        then they must divide the money in four and choose three other pirates to
+        receive the other shares.
+        If the senior pirate wishes to guarantee that the pirates they choose
+        vote in favor of their scheme, then they should choose to take a smaller
+        share, and give the other pirates a larger share.
+
+3-1 A common problem for compilers and text editors is determining whether the
+    the parentheses in a string are balanced and properly nested. For example,
+    the string ((())())() contains properly nested parentheses, which the string
+    )()( and ()) do not. Give an algorithm that returns true if a string contains
+    properly nested and balanced parentheses, and false if otherwise. For full
+    credit, identify the position of the first offending parenthesis if the string
+    is not properly nested and balanced.
+    solution:
+        see parens.cpp
+
+3-2 Write a program to reverse the direction of a given singly-linked list. In other
+    words, after the reversal all pointers should now point backwards. Your
+    algorithm should take linear time.
+    solution:
+        see reverse.cpp.
+
+3-3 We have seen how dynamic arrays enable arrays to grow in size while still
+    achieving constant-time amortized performance. The problem concerns extending
+    dynamic arrays to let them both grow and shrink on demand.
+    (a) Consider an underflow strategy which cuts the array size in half whenever
+        the array falls below half full. Give an example sequence of insertions and
+        deletions where this strategy gives a bad amortized cost.
+    (b) Then, give a better underflow strategy than that suggested above, one that
+        achieves constant amortized cost per deletion.
+    solution:
+        (a) Suppose our array has a capacity of 16, and has 8 elements. Alternate
+            deleting and inserting elements at the end, and the array will
+            reallocate on every operation, giving a bad amortized cost per operation.
+        (b) Only reduce the capacity of the array if the array falls below
+            three-eighths full. Then, after a deletion which triggers the resizing,
+            an immediate insertion will not cause another resize.
+
+3-4 Design a dictionary data structure in which search, insertion, and deletion can
+    all be processed in O(1) time in the worst case. You may assume the set
+    elements are integers drawn from a finite set 1, 2, .., n, and initialization
+    can take O(n) time.
+    solution: I don't think the question has enough information. It doesn't
+              specify what the keys are; it seems like the question is describing
+              a set data structure rather than a dictionary. Apparently the
+              solution is a bit array.
+
+3-5 Find the overhead fraction (the ration of data space over total space) for each
+    of the following binary tree implementations on n nodes:
+    (a) All nodes store data, two child pointers, and a parent pointer. The data
+        field requires four bytes and each pointer requires four bytes.
+    (b) Only leaf nodes store data; internal nodes store two child pointers. The data
+        field requires four bytes and each pointer requires two bytes.
+
+    solution:
+        (a) For this scenario, the tree requires 4n bytes total, n bytes of which are
+            data. Thus, the overhead fraction is 1/4.
+        (b) For a balanced binary tree of n nodes, there are (n+1)/2 leaf nodes, and
+            n - ( (n+1)/2 ) internal nodes. So, since internal and leaf nodes happen
+            to have the same total space requirement, total space is simply n * 4,
+            and data space is ((n+1)/2) * 4 = ((n+1)*2). This reduces to 2n/n+1.
+
+3-6 Describe how to modify any balanced tree data structure such that search, insert,
+    delete, minimum and maximum still take O(log n) time each, but successor and
+    predecessor now take O(1) time each. Which operations have to be modified to
+    support this?
+    solution:
+        Add a pointer to each node to its predecessor and successor. Insert and
+        delete must be modified to update these pointers. Insertion and deletion
+        already traverse the tree to find the appropriate spot to insert or element
+        to delete, so this shouldn't affect their O(log n) complexity.
+
+3-7 Suppose you have access to a balanced dictionary data structure, which supports
+    each of the operations search, insert, delete, minimum, maximum, successor and
+    predecessor in O(log n) time. Explain how to modify the insert and delete
+    operations so that they still take O(log n) time but minimum and maximum take
+    O(1) time. Hint: think in terms of abstract dictionary operations instead of
+    mucking about with pointers and the like.)
+    solution:
+        I don't see a solution that doesn't involve pointers. The hint is not
+        helpful, as I don't understand what is meant by "abstract dictionary
+        operations".
+        The solution on the wiki doesn't make any sense. It says to store two
+        extra elements, I'm assuming outside the tree, and to compare the values
+        of inserted and deleted elements to keep these values updated. It would
+        seem to me a better idea to use pointers, especially if the data items
+        are large. These questions are starting to irritate me.
+
+3-8 Design a data structure to support the following operations:
+        insert( x, T ) -- insert item x into the set T
+        delete( k, T ) -- delete the k-th smallest item from T
+        member( x, T ) -- return true iff x is a member of T
+
+   All operations must take O(log n) time on an n-element set.
+   solution:
+        Use a binary search tree, with an extra pointer in each node pointing to its
+        successor. Insert would be as normal, delete would use the successor pointers
+        to find the appropriate element to delete. Member would use the typical
+        binary search tree search operation.
+
+3-9 A concatenate operation takes two sets S_1 and S_2, where every key in S_1 is
+    smaller than any key in S_2 and merges them together. Give an algorithm to
+    concatenate two binary search trees into one binary search tree. The worst-case
+    running time should be O(h) where h is the maximal height of the two trees.
+    solution:
+        If the trees are not required to remain balanced, take the maximum element
+        of S_1, and make it the root of the new tree, with its left node the root of
+        S_1 and its right node the root of S_2.
+
+3-10 In the bin-packing problem, we are given n metal objects, each weighing
+     between zero and one kg. Our goal is to find the smallest number of bins that
+     will hold the n objects, with each bin holding one kg at most.
+        1. The best-fit heuristic for bin packing is as follows. Consider the objects
+           in the order in which they are given. For each object, place it into the
+           partially filled bin with the smallest amount of extra room after the
+           object is inserted. If no such bin exists, start a new bin. Design an
+           algorithm which implements the best-fit heuristic (taking as input the n
+           weights w_1, w_2, ..., w_n and outputting the number of bins used) in
+           O(log n) time.
+        2. Repeat the above with the worst-fit heuristic, where we put the next
+           object in the partially filled bin with the most room after the object
+           is inserted.
+
+     solution:
+        see binpacking.cpp
+
+3-11 Suppose that we are given a sequence of values x_1, x_2, ..., x_n and seek to
+     repeatedly answer queries of the form: given i and j, find the smallest value
+     in x_i ... x_j
+        1. Design a data structure that uses O(n^2) space and answers queries in
+           O(1) time.
+        2. Design a data structure that uses O(n) space and answers queries in
+           O(log n) time. For partial credit, your data structure can use O(log n)
+           space and have O(log n) query time.
+     solution:
+        see smallestij.cpp, Structure1 and Structure2 classes.
+        Structure1 uses a two-dimensional vector and precalculates the minimum
+        element in each range on construction, to return the minimum with a 
+        simple vector access.
+
+3-12 Suppose you are given an input set S of n numbers, and a black box that if
+     given any sequence of real numbers and an integer k instantly and correctly
+     answers whether there is a subset of input sequence whose sum is exactly k.
+     Show how to use the black box O(n) times to find a subset of S that adds up
+     to k.
+     solution:
+        Call the black box on the entire set S. If it returns false, there is no
+        subset of S that adds up to k. Otherwise, call the black box on subsets of
+        S, removing one element from the subset until the black box returns false.
+        Put the removed element in a new subset S', and add it back into the black
+        box testing subset, repeating (but not removing any member of S') until only
+        elements of S' remain in the testing set.
+
+3-13 Let A[1..n] be an array of real numbers. Design an algorithm to perform any
+     sequence of the following operations:
+        1. Add( i, y ) -- add value y to the i'th number.
+        2. Partial-sum( i ) -- return the sum of the first i numbers.
+     There are no insertions or deletions; the only change is to the value of the
+     numbers. Each operation should take O(log n) steps. You may use one additional
+     array of size n as a work space.
+     solution:
+        see realarray.cpp
+
+3-14 Skipping this for now
+3-15 Skipping this for now
+
+3-16 Implement versions of several different data structures, such as linked lists,
+     binary trees, balanced binary search trees, and hash tables. Conduct experiments
+     to assess the relative performance of these data structures in a simple
+     application that reads a large text file and reports exactly one instance of
+     each word that appears within it. This application can be efficiently
+     implemented by maintaining a dictionary of all distinct words that have appeared
+     thus far in the text and inserting/reporting each word that is not found. Write
+     a brief report with your conclusions.
+     solution:
+        see uniquewords.cpp
+
+3-17 A Caesar shift (see Cryptography) is a very simple class of ciphers for secret
+     messages. Unfortunately, they can be broken using a statistical property of
+     English. Develop a program capable of decrypting Caesar shifts of sufficiently
+     long texts.
+     solution:
+        see caeser_decode_stats.cpp
+
+3-18 What method would you use to look up a word in a dictionary?
+     solution:
+        If we assume that the dictionary does not have any visual aids to determine
+        where each letter starts, open the dictionary somewhere near the middle. If
+        the word we are searching for does not lie between the first and last words
+        on this page, alphabetically, repeat, choosing a spot halfway through the
+        section before our selection if our word comes before in alphabetical order,
+        or halfway through to section after our selection if it comes after. Repeat
+        until the word is after the first word on the page, and before the last. Then,
+        to find the word on the page, look at the word halfway down the page. If it
+        comes before our word, look halfway down the page from there, and if it comes
+        after, look halfway up the page. Repeat until the word is found.
+        This method treats the problem as a binary search, since dictionaries are
+        sorted in alphabetical order.
+
+3-19 Imagine you have a closet full of shirts. What can you do to organize your shirts
+     for easy retrieval?
+     solution:
+        I have only black shirts in my closet. I organize my shirts by style; on the
+        far left are tank tops and sleeveless tees, then t shirts, then longer shirts.
+        T shirts are organized with plain black shirts on the left, then graphic tees
+        to their right. To find a particular shirt, I can choose a spot that is
+        likely to contain the shirt I want, then move left or right depending on
+        whether the selected shirt comes before or after the desired shirt in my own
+        sorting order. If I had an enormous closet full of shirts, then I could apply
+        a binary search strategy, but with the number of shirts I have, that is
+        unnecessary.
+
+3-20 Write a function to find the middle element of a singly-linked list.
+     solution:
+        see middlenode.cpp
+
+3-21 Write a function to determine if two binary trees are identical. Identical trees
+     have the same key value at each position and the same structure.
+     solution:
+        see treecompare.cpp
+
+3-22 Write a program to convert a binary search tree to a linked list.
+     solution:
+        see treetolist.cpp
+

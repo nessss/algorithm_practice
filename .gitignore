@@ -1,0 +1,20 @@
+# ignore all
+*
+
+# unignore all with extensions
+!*.*
+
+# unignore dirs
+
+!*/
+
+# above will ignore all files without extensions
+
+*.gcov
+*.gcda
+*.o
+
+*.dSYM/
+*.stats
+
+*.out.*
