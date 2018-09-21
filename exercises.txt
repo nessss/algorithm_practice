@@ -659,3 +659,4 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      solution:
         see treetolist.cpp
 
+3-23 Implement an algorithm to reverse a linked list. Now do it without recursion.
