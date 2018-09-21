@@ -1,92 +1,137 @@
 #include <iostream>
+#include <chrono>
+
+template <typename T>
+class list_node
+{
+    public:
+        list_node( T data ) : data( data ), next( NULL ) {}
+        T data;
+        list_node<T>* next;
+
+        void push_back( T data );
+};
+
+template <typename T>
+void list_node<T>::push_back( T data )
+{
+    if( next == NULL )
+    {
+        next = new list_node<T>( data );
+        return;
+    }
+
+    next->push_back( data );
+}
 
 template <typename T>
 class list
 {
     public:
-        list() : next( NULL ) {}
-        T data;
-        list* next;
+        list() : head( NULL ) {}
+        list_node<T>* head;
         void push_front( T data );
         void push_back( T data );
-        void reverse_recursion();
+        list_node<T>* reverse_recursion( list_node<T>* prev = NULL );
         void reverse();
-
-    private:
-        void reverse_recur( list* prev );
 };
 
 template <typename T>
 void list<T>::push_front( T data )
 {
-    std::cout << "adding node with data " << data << " to front" << std::endl;
-    list<T>* current_next = next;
-    list<T>* new_next = new list<T>;
-    new_next->data = this->data;
-    new_next->next = current_next;
-    this->data = data;
-    next = new_next;
+
+    list_node<T>* old_head = head;
+    head = new list_node<T>( data );
+    head->next = old_head;
 }
 
 template <typename T>
 void list<T>::push_back( T data )
 {
-    list<T>* new_node = new list<T>;
-    new_node->data = data;
-    list<T>* tail = this;
-    while( tail->next != NULL )
+    if( head == NULL )
     {
-        tail = tail->next;
+        head = new list_node<T>( data );
+        return;
     }
-    tail->next = new_node;
+    head->push_back( data );
 }
 
 template <typename T>
-void list<T>::reverse_recursion()
+list_node<T>* list<T>::reverse_recursion( list_node<T>* prev )
 {
-}
-
-template <typename T>
-T list<T>::reverse_recur( list<T>* prev )
-{
+    if( prev == NULL )
+    {
+        list_node<T>* old_head = head;
+        head = reverse_recursion( head );
+        old_head->next = NULL;
+        return head;
+    }
+    else
+    {
+        if( prev->next != NULL )
+        {
+            list_node<T>* return_value = reverse_recursion( prev->next );
+            prev->next->next = prev;
+            return return_value;
+        }
+        else
+        {
+            return prev;
+        }
+    }
 }
 
 template <typename T>
 void list<T>::reverse()
 {
-    list<T>* node, next_node, next_next_node;
-    node = this;
-    next_node = next;
-    if( next != null ) next_next_node = next->next;
-    else next_next_node = NULL;
+    list_node<T> *node, *next_node, *nextnext_node, *old_head;
+    node = head;
+    next_node = node->next;
+    old_head = head;
 
-    while( next_next_node != NULL )
+    if( next_node->next == NULL )
+    {
+        // list has only two elements
+        head = next_node;
+        next_node->next = node;
+        node->next = NULL;
+    }
+    nextnext_node = next_node->next;
+
+    while( nextnext_node->next != NULL )
     {
         next_node->next = node;
-
         node = next_node;
-        next_node = next_next_node;
-        
-        next_next_node = next_next_node->next;
+        next_node = nextnext_node;
+        nextnext_node = nextnext_node->next;
     }
 
-    if( next_node != NULL )
-    {
-        next_node->next = node;
-    }
+    next_node->next = node;
+    nextnext_node->next = next_node;
+
+    head = nextnext_node;
+    old_head->next = NULL;
 }
 
 int main()
 {
     list<int> int_list;
-    int_list.data = 0;
 
-    for( int i = 1; i < 24; ++i )
+    auto setup_start = std::chrono::high_resolution_clock::now();
+
+    for( int i = 0; i < 2400; ++i )
     {
         int_list.push_front( i );
     }
 
-    list<int>* node = &int_list;
+    auto setup_end = std::chrono::high_resolution_clock::now();
+
+    auto setup_duration = std::chrono::duration_cast<std::chrono::duration<double, std::micro>>( setup_end - setup_start );
+
+    std::cout << "filling list took " << setup_duration.count() << " microseconds" << std::endl;
+
+    /*
+    list_node<int>* node = int_list.head;
     std::cout << "{ ";
     while( node != NULL )
     {
@@ -94,4 +139,47 @@ int main()
         node = node->next;
     }
     std::cout << "\b\b }" << std::endl;
+    */
+
+    auto recursion_start = std::chrono::high_resolution_clock::now();
+
+    int_list.reverse_recursion();
+
+    auto recursion_end = std::chrono::high_resolution_clock::now();
+
+    auto recursion_duration = std::chrono::duration_cast<std::chrono::duration<double, std::micro>>( recursion_end - recursion_start );
+
+    std::cout << "reverse with recursion took " << recursion_duration.count() << " microseconds" << std::endl;
+
+    /*
+    node = int_list.head;
+    std::cout << "{ ";
+    while( node != NULL )
+    {
+        std::cout << node->data << ", ";
+        node = node->next;
+    }
+    std::cout << "\b\b }" << std::endl;
+    */
+
+    auto reverse_start = std::chrono::high_resolution_clock::now();
+
+    int_list.reverse();
+
+    auto reverse_end = std::chrono::high_resolution_clock::now();
+
+    auto reverse_duration = std::chrono::duration_cast<std::chrono::duration<double, std::micro>>( reverse_end - reverse_start );
+
+    std::cout << "reverse without recursion took " << recursion_duration.count() << " microseconds" << std::endl;
+
+    /*
+    node = int_list.head;
+    std::cout << "{ ";
+    while( node != NULL )
+    {
+        std::cout << node->data << ", ";
+        node = node->next;
+    }
+    std::cout << "\b\b }" << std::endl;
+    */
 }
