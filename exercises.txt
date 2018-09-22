@@ -671,3 +671,14 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         My solution involves keeping a dictionary of sets (implemented as binary
         search trees in c++), with each set representing the collection of files
         visited in each domain. Each set is keyed by its domain name.
+
+3-25 You are given a search string and a magazine. You seek to generate all the 
+     characters in search string by cutting them out from the magazine. Give an
+     algorithm to efficiently determine whether the magazine contains all the 
+     letters in the search string.
+     solution:
+        Assuming that the magazine is in fact a physical magazine that we don't
+        have in the form of a text file, it would seem that the only way to do it
+        would be to look at each character in the magazine, and check whether that
+        character is in the search string. Repeat until either all characters in the
+        search string are accounted for, or the end of the magazine is reached.
