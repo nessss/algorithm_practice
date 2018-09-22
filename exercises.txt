@@ -682,3 +682,9 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         would be to look at each character in the magazine, and check whether that
         character is in the search string. Repeat until either all characters in the
         search string are accounted for, or the end of the magazine is reached.
+
+3-26 Reverse the words in a sentence--i.e., My name is Chris becomes Chris is name
+     My. Optimize for time and space.
+     solution:
+        see sentencereverse.cpp
+
