@@ -687,4 +687,9 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      My. Optimize for time and space.
      solution:
         see sentencereverse.cpp
-
+        My solution involves keeping two string variables, one for constructing
+        each word of the input, and one for constructing the total output. My 
+        algorithm iterates over the input string only once. I suppose it would be
+        possible to do without the word variable, and to use an integer counter or
+        a pointer to keep track of the appropriate point in the output string to put
+        new characters.
