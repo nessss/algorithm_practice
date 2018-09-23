@@ -698,3 +698,7 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      using any extra storage. Also, identify the location of the loop.
      solution:
         see listloop.cpp
+        I used two pointers, and iterated through the list twice as fast with one of
+        them, checking if the faster-moving pointer pointed to a node which had the
+        node pointed to by the slower-moving pointer as its next node. If a pointer
+        ever is set to NULL, then it is clear that the list has no loop.

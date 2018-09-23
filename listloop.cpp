@@ -44,30 +44,43 @@ void linked_list<T>::push_back( T data )
     node->next = new_node;
 }
 
+/* return a pair of nodes, the second pointing back to the first, which
+ * is earlier in the list. */
 template <typename T>
 std::pair<list_node<T>*, list_node<T>*> linked_list<T>::find_loop()
 {
     std::pair<list_node<T>*, list_node<T>*> result( NULL, NULL );
-    list_node<T> *first = head;
-    list_node<T> *second = head->next;
+    if( head == NULL ) return result;
 
-    if( second == NULL ) return result;
+    list_node<T> *slow = head;
+    list_node<T> *fast = head;
 
-    if( second->next == NULL ) return result;
-    second = second->next;
+
+    bool increment_slow = false;
+    int loops = 0;
 
     while( true )
     {
-        if( first == NULL || second == NULL ) return result;
-
-        if( first->next == second )
+        ++loops;
+        if( fast == NULL )
         {
-            second = second->next;
-            continue;
+            std::cout << "result found in " << loops << " loops" << std::endl;
+            return result;
         }
 
-        if( second->next = first )
+        if( fast->next == slow )
         {
+            result.first = slow;
+            result.second = fast;
+            std::cout << "result found in " << loops << " loops" << std::endl;
+            return result;
+        }
+
+        fast = fast->next;
+        if( increment_slow )
+        {
+            increment_slow = !increment_slow;
+            slow = slow->next;
         }
     }
 
@@ -97,6 +110,16 @@ int main()
     node->next = list.head;
 
     auto loop_result = list.find_loop();
+    if( loop_result.first != NULL )
+        std::cout << "list has loop; node with data " << loop_result.second->data << " points back to node with data " << loop_result.first->data << std::endl;
+    else
+        std::cout << "list has no loop" << std::endl;
+
+    linked_list<int> no_loop;
+
+    for( int i = 0; i < 20; ++i ) no_loop.push_front( i );
+
+    loop_result = no_loop.find_loop();
     if( loop_result.first != NULL )
         std::cout << "list has loop; node with data " << loop_result.second->data << " points back to node with data " << loop_result.first->data << std::endl;
     else
