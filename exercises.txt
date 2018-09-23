@@ -693,3 +693,8 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         possible to do without the word variable, and to use an integer counter or
         a pointer to keep track of the appropriate point in the output string to put
         new characters.
+
+3-27 Determine whether a linked list contains a loop as quickly as possible without
+     using any extra storage. Also, identify the location of the loop.
+     solution:
+        see listloop.cpp
