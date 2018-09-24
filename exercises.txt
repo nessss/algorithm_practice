@@ -717,3 +717,7 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         pair_products[i + 1] and multiply every other member of pair_products, using
         modulo to wrap around the array boundary, until reaching i - 1. Do not use
         pair_products[i - 1], but rather X[i - 1]. Put the result in M[i].
+
+3-29 Give an algorithm for finding an ordered word pair (e.g., New York) occurring
+     with the greatest frequency in a given webpage. Which data structures would you
+     use? Optimize both time and space.
