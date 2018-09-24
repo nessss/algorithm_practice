@@ -47,6 +47,53 @@ inline size_t key( int i, int j )
 }
 */
 
+std::pair<long, int> product( std::vector<long>, std::vector<long>, int, int );
+std::pair<long, int> productLeft( std::vector<long>, int, int );
+std::pair<long, int> productRight( std::vector<long>, int, int );
+
+std::vector<long> internet_algorithm(std::vector<long> X) 
+{
+    std::vector<long> M;
+    int multiplications = 0;
+
+    for (int i = 0; i < X.size(); i++) {
+        auto result =  product( X, M, i + 1, X.size() );
+        M.push_back( result.first );
+        multiplications += result.second;
+    }
+
+    std::cout << "algorithm completed in " << multiplications << " operations using internet solution" << std::endl;
+    return M;
+}
+
+std::pair<long, int> product(std::vector<long> X, std::vector<long> Y, int i, int length) 
+{
+    if (i == length)
+        return productLeft(X, i - 2, length);
+
+    auto left_recursion_result = productLeft(X, i - 2, length);
+    auto right_recursion_result = productRight(X, i + 1, length);
+    return std::make_pair<long, int>( X[i] * left_recursion_result.first * right_recursion_result.first, left_recursion_result.second + right_recursion_result.second + 2 );
+}
+
+std::pair<long, int> productLeft(std::vector<long> X, int i, int length) 
+{
+    if (i < 0)
+        return std::make_pair<long, int>( 1, 0 );
+
+    auto recursion_result = productLeft(X, i - 1, length);
+    return std::make_pair<long, int>( X[i] * recursion_result.first, recursion_result.second + 1 );
+}
+
+std::pair<long, int> productRight(std::vector<long> X, int i, int length) 
+{
+    if (i >= length)
+        return std::make_pair<long, int>( 1, 0 );
+
+    auto recursion_result = productRight(X, i + 1, length);
+    return std::make_pair<long, int>( X[i] * recursion_result.first, recursion_result.second + 1 );
+}
+
 std::vector<long> better_algorithm( std::vector<long> &X )
 {
     std::vector<long> result;
@@ -110,4 +157,6 @@ int main()
     std::vector<long> M2 = better_algorithm( X );
 
     print_vector( M2 );
+
+    std::vector<long> M3 = internet_algorithm( X );
 }

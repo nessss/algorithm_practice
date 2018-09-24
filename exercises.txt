@@ -702,3 +702,18 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         them, checking if the faster-moving pointer pointed to a node which had the
         node pointed to by the slower-moving pointer as its next node. If a pointer
         ever is set to NULL, then it is clear that the list has no loop.
+
+3-28 You have an unordered array X of n integers. Find the array M containing n
+     elements where M_i is the product of all integers in X except for X_i. You may
+     not use division. You can use extra memory. (Hint: There are solutions faster
+     than O(n^2).)
+     solution:
+        see findproduct.cpp
+        I first implemented the naive, O(n^2) solution, using nested iteration over
+        X, multiplying all elements except X_i.
+        Then, I thought about how to improve it; I though of keeping another array
+        of pairwise products, so that I could iterate over that as the nested loop
+        instead, and perform fewer multiplications overall. For M[i], start at 
+        pair_products[i + 1] and multiply every other member of pair_products, using
+        modulo to wrap around the array boundary, until reaching i - 1. Do not use
+        pair_products[i - 1], but rather X[i - 1]. Put the result in M[i].
