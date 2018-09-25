@@ -731,3 +731,16 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     Show how the Grinch can do the job in O(nlogn) time. 
     solution:
         see grinch.cpp
+        My solution is to take the players, and put them on either the good team or
+        the bad team, depending on whether their skill score is higher or lower than
+        half the maximum score. The teams are represented by std::multiset, which
+        are implemented as binary search trees.
+        After the initial sorting, in O(n) time, the teams are balanced by taking the
+        larger team, and if it is the good team, repeatedly moving the player with
+        the minimum score to the bad team, and if it is the bad team, moving the
+        player with the maximum score to the good team.
+        Finally, the maximum element of the bad team is compared to the minimum
+        element of the good team, and they are swapped if the bad team player is
+        better than the good team player. This is repeated until the best bad team
+        player is worse than the worst good team player.
+
