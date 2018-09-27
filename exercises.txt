@@ -770,3 +770,8 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     ((1,9),(3,5)). The pair sums for these partitions are (4,14), (6,12), and 
     (10,8). Thus the third partition has 10 as its maximum sum, which is the minimum
     over the three partitions.
+    solution:
+        see pairpartition.cpp
+        My solution involves first sorting the input sequence using an O(nlogn)
+        sorting algorithm, then taking the maximum and minimum elements and putting
+        them into pairs. This will minimize the maximum sum among pairs.
