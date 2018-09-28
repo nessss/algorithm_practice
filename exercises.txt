@@ -802,3 +802,5 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     algorithm for finding whether there exists a pair of elements, one from S1 and
     one from S2, that add up to x. (For partial credit, give a Θ(n2) algorithm for
     this problem.)
+    solution:
+        see findpairsum.cpp
