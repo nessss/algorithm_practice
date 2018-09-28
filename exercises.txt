@@ -783,3 +783,11 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     numbers for identical colors stay sorted. For example: (1,blue), (3,red), 
     (4,blue), (6,yellow), (9,red) should become (3,red), (9,red), (1,blue), (4,blue),
     (6,yellow).
+    solution:
+        see numbercolor.cpp
+        My solution involves keeping a vector for each color, and appending the
+        elements of the input sequence to the appropriate vector for its color.
+        Since the input sequence is already sorted by number, the color vectors will
+        retain the sorted order. Once the input sequence is partitioned into colors,
+        the color vectors are merged in the appropriate order to create the output
+        sequence.
