@@ -816,3 +816,22 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      3. You are given all the book checkout cards used in the campus library during 
         the past year, each of which contains the name of the person who took out
         the book. Determine how many distinct people checked out at least one book.
+     solution:
+        1. Sort only the bills by the name of the customer. Take the pile of checks
+           and find the associated bill for each. Any bill left without an associated
+           check is unpaid. Sorting the bills can be accomplished in O(nlogn) time,
+           and then pairing will take O(mlogn) time, since searching the bill pile
+           after sorting can be accomplished in O(logn) time, where n is the number
+           of bills, and m is the number of checks. Thus, the total complexity is
+           O(nlogn + mlogn).
+        2. Keep a total for each publisher. Go through the list, and increment the
+           total for each publisher as their book appears on the list. This will take
+           O(nm + m) time, where n is the length of the list and m is the number of 
+           publishers (assume that the publisher counts are kept in a hashmap 
+           dictionary). 
+        3. Keep a unique-key binary search tree of people. Go through the list of 
+           cards, attempting to insert the name into the set. Once done with the 
+           cards, the size of the tree is the number of people who checked out at
+           least one book. This would run in O(nlogm) time, where n is the number of
+           cards and m is the number of unique people who checked out at least one
+           book.
