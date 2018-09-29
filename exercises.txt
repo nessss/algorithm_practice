@@ -852,3 +852,6 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     2. Assume that A and B are sorted. Give an O(n) algorithm for the problem.
     solution:
         see union.cpp
+
+4-10 Given a set S of n integers and an integer T, give an O(nk−1logn) algorithm to
+     test whether k of the integers in S add up to T.
