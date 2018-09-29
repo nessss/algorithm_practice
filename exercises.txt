@@ -850,3 +850,5 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
 
     1. Assume that A and B are unsorted. Give an O(nlogn) algorithm for the problem.
     2. Assume that A and B are sorted. Give an O(n) algorithm for the problem.
+    solution:
+        see union.cpp
