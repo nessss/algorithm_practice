@@ -843,3 +843,10 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     2. Assume that S is sorted. Give an O(n) algorithm for the problem.
     solution:
         see realpairsum.cpp
+
+4-9 Give an efficient algorithm to compute the union of sets A and B, where 
+    n=max(|A|,|B|). The output should be an array of distinct elements that form the
+    union of the sets, such that they appear more than once in the union.
+
+    1. Assume that A and B are unsorted. Give an O(nlogn) algorithm for the problem.
+    2. Assume that A and B are sorted. Give an O(n) algorithm for the problem.
