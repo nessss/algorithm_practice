@@ -853,5 +853,16 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
     solution:
         see union.cpp
 
-4-10 Given a set S of n integers and an integer T, give an O(nk−1logn) algorithm to
-     test whether k of the integers in S add up to T.
+4-10 Given a set S of n integers and an integer T, give an O(n^(k−1)logn) algorithm 
+     to test whether k of the integers in S add up to T.
+     solution:
+        see testsum.cpp
+        My solution involves first sorting S, in descending order. Then the k
+        largest elements are summed, and if they are smaller than T, then there is
+        no way to get a sum of T. Likewise, the k smallest elements are summed, and
+        if they are larger than T, there is no way to get a sum of T.
+        At this point, if we haven't ruled out a solution, then we start looping
+        through bitsets representing all the permutations of k elements from S, and
+        using those bitsets to select elements from S, summing them and checking them
+        against T. If we find a subset, then we return true. If we get through all
+        the permutations and don't find a subset summing to T, we return false.
