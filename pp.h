@@ -8,6 +8,11 @@ void pprint( ForwardIterator begin, ForwardIterator end, std::string label = "" 
 {
     if( label != "" ) std::cout << label << ": ";
     std::cout << "{ ";
+    if( begin == end )
+    {
+        std::cout << "}" << std::endl;
+        return;
+    }
     for( auto it = begin; it != end; ++it )
     {
         std::cout << *it << ", ";
@@ -15,4 +20,4 @@ void pprint( ForwardIterator begin, ForwardIterator end, std::string label = "" 
     std::cout << "\b\b }" << std::endl;
 }
 
-#endif
+#endif // __PP_H
