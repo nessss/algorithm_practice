@@ -878,3 +878,24 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      integers in O(n+klogn).
      solution:
         see ksmallest.cpp
+
+4-13 You wish to store a set of n numbers in either a max-heap or a sorted array. 
+     For each application below, state which data structure is better, or if it does
+     not matter. Explain your answers.
+     1. Want to find the maximum element quickly.
+     2. Want to be able to delete an element quickly.
+     3. Want to be able to form the structure quickly.
+     4. Want to find the minimum element quickly.
+     solution:
+        1. Either a max-heap or sorted array will allow access to the maximum
+           element in O(1) time.
+        2. A max-heap will allow an element to be deleted in O(1) time, while a
+           sorted array will have to be reorganized in O(n) time with the deletion
+           of any element except the maximum.
+        3. Either a max-heap or sorted array will require up to n restructurings
+           during construction, so either would be equally as bad with an unsorted
+           input sequence.
+        4. A sorted array would be better, as it allows access to the minimum element
+           in O(1) time, while a max-heap requires O(logn) time. If we could use a
+           min-heap instead, it would be just as good as a sorted array.
+
