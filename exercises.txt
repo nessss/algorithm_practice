@@ -899,3 +899,6 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
            in O(1) time, while a max-heap requires O(logn) time. If we could use a
            min-heap instead, it would be just as good as a sorted array.
 
+4-14 Give an O(nlogk)-time algorithm that merges k sorted lists with a total of n 
+     elements into one sorted list. (Hint: use a heap to speed up the elementary 
+     O(kn)-time algorithm).
