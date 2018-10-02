@@ -873,3 +873,6 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      more than n/4 times.
      solution:
         see findfrequent.cpp
+
+4-12 Devise an algorithm for finding the k smallest elements of an unsorted set of n
+     integers in O(n+klogn).
