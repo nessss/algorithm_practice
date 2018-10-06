@@ -902,3 +902,5 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
 4-14 Give an O(nlogk)-time algorithm that merges k sorted lists with a total of n 
      elements into one sorted list. (Hint: use a heap to speed up the elementary 
      O(kn)-time algorithm).
+     solution:
+        I gave up on this one.
