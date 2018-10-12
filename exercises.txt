@@ -911,3 +911,11 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
          keys. How many key comparisons does your algorithm do in the worst case?
          Must your algorithm determine which key is largest and second-largest in
          the process?
+     solution:
+        see findlargekeys.cpp
+
+4-16 Use the partitioning idea of quicksort to give an algorithm that finds the 
+     median element of an array of n integers in expected O(n) time. (Hint: must you
+     look at both sides of the partition?)
+     solution:
+        see quicksortmedian.cpp
