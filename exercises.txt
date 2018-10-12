@@ -919,3 +919,10 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      look at both sides of the partition?)
      solution:
         see quicksortmedian.cpp
+
+4-17 The median of a set of n values is the ⌈n/2⌉th smallest value.
+
+     (1) Suppose quicksort always pivoted on the median of the current sub-array.
+         How many comparisons would Quicksort make then in the worst case?
+     (2) Suppose quicksort were always to pivot on the ⌈n/3⌉th smallest value of the
+         current sub-array. How many comparisons would be made then in the worst case?
