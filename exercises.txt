@@ -926,3 +926,17 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
          How many comparisons would Quicksort make then in the worst case?
      (2) Suppose quicksort were always to pivot on the ⌈n/3⌉th smallest value of the
          current sub-array. How many comparisons would be made then in the worst case?
+     solution:
+        (1) For the first partition, each element will be compared against the pivot,
+            for n comparisons. Then, each partition will be compared against its
+            pivot, for (n-1)/2 comparisons each (total of (n-1) comparisons for both).
+            This repeats log2(n) times, for a total of n * log2(n) comparisons. Since
+            the pivot is always the median, worst, best, and expected cases are the
+            same.
+        (2) For the first partition, it will be the same as any other pivot, n
+            comparisons. The second partition will involve (n-1)/3 for the smaller
+            partition, and 2*(n-1)/3 for the larger. It seems to me that n * log2(n)
+            comparisons will also be made in this case. The drawback seems to be that
+            it would be less efficient for parallel processing, as the smaller
+            partitions will be calculated first, and we will have to wait longer
+            for the larger partitions to complete.
