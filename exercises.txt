@@ -940,3 +940,19 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
             it would be less efficient for parallel processing, as the smaller
             partitions will be calculated first, and we will have to wait longer
             for the larger partitions to complete.
+
+4-18 Suppose an array A consists of n elements, each of which is red, white, or blue.
+     We seek to sort the elements so that all the reds come before all the whites,
+     which come before all the blues The only operation permitted on the keys are
+
+     (1) Examine(A,i) -- report the color of the ith element of A.
+     (2) Swap(A,i,j) -- swap the ith element of A with the jth element.
+     
+     Find a correct and efficient algorithm for red-white-blue sorting. There is a
+     linear-time solution. This is also known as the Dutch national flag problem.
+     The simplest linear time solution performs two passes of the partition operation
+     from Quicksort. The first pass treats the red and white elements as 
+     indistinguishable, and separates them from the blue. The second pass is just 
+     separates the elements within the red/white sub-array.
+
+
