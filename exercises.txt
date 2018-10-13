@@ -956,3 +956,13 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      separates the elements within the red/white sub-array.
      solution:
         see dutchflag.cpp
+
+4-19 An inversion of a permutation is a pair of elements that are out of order.
+
+     (1) Show that a permutation of n items has at most n(n−1)/2 inversions. Which 
+         permutation(s) have exactly n(n−1)/2 inversions?
+     (2) Let P be a permutation and Pr be the reversal of this permutation. Show that
+         P and Pr have a total of exactly n(n−1)/2 inversions.
+     (3) Use the previous result to argue that the expected number of inversions in
+         a random permutation is n(n−1)/4.
+
