@@ -954,5 +954,5 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      from Quicksort. The first pass treats the red and white elements as 
      indistinguishable, and separates them from the blue. The second pass is just 
      separates the elements within the red/white sub-array.
-
-
+     solution:
+        see dutchflag.cpp
