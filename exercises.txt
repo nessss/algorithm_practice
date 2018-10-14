@@ -1022,3 +1022,12 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
 
 4-22 Show that n positive integers in the range 1 to k can be sorted in O(nlogk)
      time. The interesting case is when k<<n.
+     solution:
+        see nlogksort.cpp
+        If k is known before sorting, then a O(2n) algorithm exists to sort it;
+        keep an extra array to count the number of occurrences of each possible key,
+        and fill the result array in order with the appropriate number of each key.
+        If k is unknown, then a dictionary can be used instead of an array; use the
+        input values as keys, and keep track of the count of each unique value with
+        the associated value for that key. Sort the keys, and construct the result
+        array as above.
