@@ -1019,3 +1019,6 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      solution:
         Make sure to keep the sub-lists in the order they were created at each step
         of the sort.
+
+4-22 Show that n positive integers in the range 1 to k can be sorted in O(nlogk)
+     time. The interesting case is when k<<n.
