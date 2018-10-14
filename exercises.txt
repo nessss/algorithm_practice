@@ -965,4 +965,30 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
          P and Pr have a total of exactly n(n−1)/2 inversions.
      (3) Use the previous result to argue that the expected number of inversions in
          a random permutation is n(n−1)/4.
-
+     solution:
+        (1) Consider a set of five integers, { 1, 2, 3, 4, 5 }. The permutation of
+            this set with the most inversions would be ( 5, 4, 3, 2, 1 ), containing
+            10 inversions: (5, 4), (5, 3), (5, 2), (5, 1), (4, 3), (4, 2), (4, 1),
+            (3, 2), (3, 1), (2, 1). With n = 5, n(n-1)/2 = 5 * 4 / 2 = 10.
+            The permutation with the most inversions will always be the one in
+            reverse sorting order.
+        (2) It seems impossible at first glance; the only permutation with exactly
+            n(n-1)/2 inversions would be the reverse sorted permutation, whose
+            reverse would be the sorted permutation, with no inversions.
+            Perhaps I am misunderstanding the question; if it refers to the
+            inversions as differences between the orders of the two permutations,
+            then it follows from my above answer that the reversal of a sorted
+            permutation would have exactly n(n-1)/2 inversions.
+            After reading the answer, I realize I did misunderstand the question.
+            It asked for the *sum* of inversions between the two permutations to be
+            n(n-1)/2, not for both of them to have n(n-1)/2 inversions. In this case,
+            let P be a permutation which contains n(n-1)/4 inversions. It follows
+            that this permutation will have n(n-1)/4 in-order pairs, and reversing
+            it will correct all of the existing inversions, while making the in-order
+            pairs into inversions. Thus, the total number of inversions between the
+            two permutations will be equal to n(n-1)/2.
+        (3) Since the reversal of any permutation with n(n-1)/4 inversions also has
+            n(n-1)/4 inversions, and generalizing, the reversal of a permutation with
+            x inversions will result in a permutation with (n(n-1)/2) - x inversions,
+            there will be more unique permutations with n(n-1)/4 inversions than
+            permutations with any other number of inversions.
