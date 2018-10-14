@@ -1012,4 +1012,7 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         can be done in O(n) time, but I don't think that would be in-place. Either
         an extra array must be allocated, or a list of indices must be kept,
         preventing such an algorithm from being in-place by the strict definition.
-        
+
+4-21 Stable sorting algorithms leave equal-key items in the same relative order as
+     in the original permutation. Explain what must be done to ensure that mergesort
+     is a stable sorting algorithm.
