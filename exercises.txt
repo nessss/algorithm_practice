@@ -997,5 +997,19 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
      negative keys precede all the nonnegative keys. Your algorithm must be in-place,
      meaning you cannot allocate another array to temporarily hold the items. How
      fast is your algorithm?
-
-
+     solution:
+        see negativesort.cpp
+        My solution is essentially a cocktail sort, iterating through the array
+        from the beginning, swapping elements if a negative number comes before a
+        non-negative number, then iterating back from the end, swapping elements in
+        the same fashion. If an iteration results in no swaps, the array is in the
+        desired sorted order. Since negative elements are never swapped with each
+        other, and nor are non-negative elements swapped with each other, this
+        algorithm is also stable; the relative order of negative elements remains
+        the same after sorting, as do the relative order of non-negative elements.
+        My algorithm runs in O( ((n/2)^2)*2 ) time.
+        The answer wiki simply claims that a single quicksort partition operation
+        can be done in O(n) time, but I don't think that would be in-place. Either
+        an extra array must be allocated, or a list of indices must be kept,
+        preventing such an algorithm from being in-place by the strict definition.
+        
