@@ -992,3 +992,10 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
             x inversions will result in a permutation with (n(n-1)/2) - x inversions,
             there will be more unique permutations with n(n-1)/4 inversions than
             permutations with any other number of inversions.
+
+4-20 Give an efficient algorithm to rearrange an array of n keys so that all the 
+     negative keys precede all the nonnegative keys. Your algorithm must be in-place,
+     meaning you cannot allocate another array to temporarily hold the items. How
+     fast is your algorithm?
+
+
