@@ -1031,3 +1031,7 @@ skipping a bunch of really mathy problems bc i didn't study math in school :(
         input values as keys, and keep track of the count of each unique value with
         the associated value for that key. Sort the keys, and construct the result
         array as above.
+
+4-23 We seek to sort a sequence S of n integers with many duplications, such that
+     the number of distinct integers in S is O(logn). Give an O(nloglogn) worst-case
+     time algorithm to sort such sequences.
